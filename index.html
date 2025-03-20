@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>Ferrari Landing Page Project</title>
+  
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Landing Page</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* General Styles */
+        body {
+            font-family: monospace, monospace;
+            margin: 0;
+            padding: 0;
+            color: white;
+            background-color: black;
+            padding-top: 80px; /* Add padding to body to account for fixed header */
+            height: 100%;
+            width: 100%;
+    }
+
+        /* Hide scrollbar for Chrome, Safari, and Opera */
+        body::-webkit-scrollbar {
+            display: none;
+        }
+
+        #loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #000; /* Black background */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000; /* Ensure it's on top */
+            animation: fadeOut 3s ease-in-out forwards; /* Fade out after 5 seconds */
+            opacity: 0; /* Start with 0 opacity for fade-in effect */
+        }
+
+        #loading-image {
+            width: 200px; /* Adjust size as needed */
+            height: auto;
+            opacity: 0; /* Start with 0 opacity for fade-in effect */
+            animation: fadeIn 0.5s ease-in-out 0.5s forwards; /* Fade in after 1 second */
+        }
+        /* Fade-in Animation for Loading Image */
+        @keyframes fadeIn {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
+        }
+
+        /* Fade-out Animation for Loading Screen */
+        @keyframes fadeOut {
+        0% {
+            opacity: 1;
+        }
+        80% {
+            opacity: 1; /* Stay visible for most of the animation */
+        }
+        100% {
+            opacity: 0;
+            visibility: hidden; /* Hide after fading out */
+        }
+        }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: monospace, monospace;
+            font-weight: bold;
+            color: #e00;
+
+        }
+
+        p {
+            font-size: 1.1em;
+            line-height: 1.6;
+            text-align: center;
+            font-family: monospace, monospace;
+        }
+
+        a {
+            color: #e00;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        /* Header Styles */
+        #header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 10%;
+            background-color: #000;
+            color: #fff;
+            position: fixed; /* Make the header fixed */
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000; /* Ensure it stays on top of other content */
+        }
+
+        #header-img {
+            height: 50px;
+        }
+
+        #nav-bar ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+
+        #nav-bar ul li {
+            margin-left: 20px;
+
+        }
+
+        #nav-bar ul li a {
+            color: #fff;
+            font-weight: bold;
+        }
+
+        #nav-bar ul li a:hover {
+            color: #e00;
+        }
+
+        /* Section Styles */
+        section {
+            padding: 60px 10%;
+            text-align: center;
+        }
+
+        section h1 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+
+        section p {
+            max-width: 800px;
+            margin: 0 auto 40px;
+        }
+
+        #form {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        #email {
+            padding: 10px;
+            width: 300px;
+            border: 2px solid #e00;
+            border-radius: 5px;
+            margin-right: 10px;
+        }
+
+        #submit {
+            padding: 10px 20px;
+            background-color: #e00;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        #submit:hover {
+            background-color: #c00;
+        }
+
+        /* Grid Styles */
+        #racing {
+            padding-top: 100px;
+        }
+
+        .grid {
+            display: inline-block;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 50px;
+            
+        }
+
+        .icon {
+            font-size: 2.5em;
+            color: #e00;
+            flex-shrink: 0;
+        }
+
+        .description {
+            flex: 1;
+        }
+
+        .description h2 {
+            margin: 0 0 10px 0;
+            font-size: 1.8em;
+            color: white;
+        }
+
+        .description p {
+            margin: 0;
+            font-size: 1.1em;
+            color: white;
+        }
+
+        /* Carousel Styles */
+
+        #sports-cars {
+            padding-top: 150px ;
+            display: flex;
+            justify-content: center;
+        }
+        #sports-cars section {
+            width: 390px;
+            height: 5px;
+        }
+
+        #carousel-inner div {
+            width: 100%;
+            height: 100%;
+        }
+        .carousel-inner {
+            animation: slide 5s infinite;
+        }
+        .carousel-item {
+            transition: transform 0.5s ease-in-out;
+        }
+        img.supercar {
+            width: 100%;
+            height: 100%;
+            min-height: 400px;
+            object-fit: cover;
+        }
+        
+        /* About Us Styles */
+        #about-us {
+            background-color: black;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            align-items: center;
+            justify-content: center;
+            margin: 50px 0;
+        }
+
+        #about-us h2 {
+            font-size: 2em;
+            margin-bottom: 20px;
+            text-align: center;
+            color: red;
+        }
+
+        #about-us p {
+            font-size: 1.1em;
+            line-height: 1.8;
+            padding-left: 110px;
+            text-align: justify;
+            color: white;
+        }
+
+        /* Footer Styles */
+        footer {
+            background-color: #000;
+            color: #fff;
+            text-align: center;
+            padding: 20px 10%;
+        }
+
+        footer a {
+            color: #e00;
+        }
+
+        footer a:hover {
+            color: #c00;
+        }
+
+        /* Media Query for Responsive Design */
+        @media (max-width: 768px) {
+            #header {
+                padding: 10px 5%; /* Reduce padding on smaller screens */
+            }
+
+            #header-img {
+                height: 40px; /* Reduce logo size on smaller screens */
+            }
+
+            #nav-bar ul li {
+                margin-left: 10px; /* Reduce spacing between nav items */
+            }
+
+            .grid {
+                flex-direction: column; /* Stack icon and description vertically on smaller screens */
+                align-items: center;
+                text-align: center;
+            }
+
+            .icon {
+                margin-right: 0;
+                margin-bottom: 10px; /* Add spacing below the icon */
+            }
+        }
+    </style>
+</head>
+<body>
+    <header id="header">
+        <div class="logo">
+            <img id="header-img" src="https://banner2.cleanpng.com/20180711/kh/aawp8mf26.webp" alt="Ferrari Logo">
+        </div>
+        <nav id="nav-bar">
+            <ul>
+                <li><a class="nav-link" href="#racing">Racing</a></li>
+                <li><a class="nav-link" href="#sports-cars">Sports Cars</a></li>
+                <li><a class="nav-link" href="#about-us">About Us</a></li>
+            </ul>
+        </nav>
+    </header>
+    <div class="container">
+            <div id="loading-screen">
+                <img src="https://i.pinimg.com/736x/7f/1e/99/7f1e992bff46e047ea1b487140e9db99.jpg" alt="Loading Image" id="loading-image">
+            </div>
+        </div>
+    <div class="container">
+        <section id="welcome-section">
+        <h1>Welcome to Ferrari</h1>
+        <p>No copyright infringement intended. All copyrighted materials belong to their respective owners. This website is not affiliated with, endorsed by, or connected to Ferrari. All content and design elements are original or used under proper licensing. This website is purely for educational purposes.</p>
+        <form id="form" action="https://www.freecodecamp.com/email-submit">
+            <input type="email" id="email" name="email" placeholder="Enter your email address" required>
+            <input type="submit" id="submit" value="Submit">
+        </form>
+        </section>
+    </div>
+    <div class="container">
+        <section id="racing">
+            <div class="grid">
+                <div class="icon">
+                    <i class="fas fa-user"></i>
+                </div>
+                <div class="description">
+                    <h2>Drivers</h2>
+                    <p>We have the best drivers in the world. Our drivers have won the most number of trophies in F1 History.</p>
+                </div>
+            </div>
+            <div class="grid">
+                <div class="icon">
+                    <i class="fas fa-trophy"></i>
+                </div>
+                <div class="description">
+                    <h2>Trophies</h2>
+                    <p>We have won the most number of trophies in F1 history. We have the best racing cars in the world.</p>
+                </div>
+            </div>
+            <div class="grid">
+                <div class="icon">
+                    <i class="fas fa-tachometer-alt"></i>
+                </div>
+                <div class="description">
+                    <h2>Speed</h2>
+                    <p>Ferrari cars are renowned for their exceptional speed and performance. With cutting-edge technology and engineering, our cars consistently achieve top speeds and acceleration, making them a dominant force on both the racetrack and the road. Experience the thrill of driving a Ferrari, where speed meets precision and luxury.</p>
+                </div>
+            </div>
+        </section>
+    <div class="container">
+        <section id="sports-cars">
+        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+        <ol class="carousel-indicators">
+            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+        </ol>
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+            <img class="supercar" src="https://cdn.ferrari.com/cms/network/media/img/resize/66f187a83510af0010d60185-laferrari-aperta-supercars-2016-cahpter-3-desk?width=1920&height=1080" alt="LaFerrari Aperta">
+            </div>
+            <div class="carousel-item">
+            <img class="supercar" src="https://cdn.ferrari.com/cms/network/media/img/resize/66d86c71f16478001289ae94-2002_enzoferrari_image-03?width=1920&height=1080" alt="Ferrari Enzo">
+            </div>
+            <div class="carousel-item">
+            <img class="supercar" src="https://cdn.ferrari.com/cms/network/media/img/resize/66d711b1dedb2b00119607f9-1987_f40_image04?width=1920&height=1080" alt="Ferrari F40">
+            </div>
+        </div>
+        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+        </div>
+        </section>
+
+        <section id="about-us">
+            <div class="description">
+                <h2>About Us</h2>
+                <p>Ferrari is an iconic Italian luxury sports car manufacturer founded by Enzo Ferrari in 1939. With a rich heritage in motorsport, Ferrari has become synonymous with speed, performance, and exclusivity. Our cars are meticulously crafted with the finest materials and cutting-edge technology, ensuring an unparalleled driving experience. At Ferrari, we are committed to pushing the boundaries of innovation while maintaining our timeless elegance and passion for excellence. Join us on a journey of automotive excellence and discover the legacy of Ferrari.</p>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <p>&copy; 2023 Ferrari. All rights reserved. <a href="#">Privacy Policy</a></p>
+    </footer>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
+<!-- partial -->
+  
+</body>
+</html>
